@@ -13,7 +13,7 @@ public class LoginPageTest {
     WebDriver driver;
     LoginPage login;
 
-    String username = "problem_user";
+    String username = "standard_user";
     String password = "secret_sauce";
 
     @BeforeMethod
@@ -23,6 +23,9 @@ public class LoginPageTest {
         driver.manage().window().maximize();
         driver.get("https://www.saucedemo.com/");
         Thread.sleep(3000);
+    }
+
+    private void login() {
         login = new LoginPage(driver);
         login.enterUsername(username);
         login.enterPassword(password);
@@ -30,9 +33,51 @@ public class LoginPageTest {
     }
 
     @Test
-    public void test_if_user_can_login() throws InterruptedException {
+    public void test_if_standard_user_can_login() throws InterruptedException {
+        username = "standard_user";
+        login();
         Thread.sleep(1000);
-        assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+        assertEquals("https://www.saucedemo.com/inventory.html", driver.getCurrentUrl());
+    }
+
+    @Test
+    public void test_if_locked_out_user_can_login() throws InterruptedException {
+        username = "locked_out_user";
+        login();
+        Thread.sleep(1000);
+        assertEquals("https://www.saucedemo.com/inventory.html", driver.getCurrentUrl());
+    }
+
+    @Test
+    public void test_if_problem_user_can_login() throws InterruptedException {
+        username = "problem_user";
+        login();
+        Thread.sleep(1000);
+        assertEquals("https://www.saucedemo.com/inventory.html", driver.getCurrentUrl());
+    }
+
+    @Test
+    public void test_if_performance_glitch_user_can_login() throws InterruptedException {
+        username = "performance_glitch_user";
+        login();
+        Thread.sleep(1000);
+        assertEquals("https://www.saucedemo.com/inventory.html", driver.getCurrentUrl());
+    }
+
+    @Test
+    public void test_if_error_user_can_login() throws InterruptedException {
+        username = "error_user";
+        login();
+        Thread.sleep(1000);
+        assertEquals("https://www.saucedemo.com/inventory.html", driver.getCurrentUrl());
+    }
+
+    @Test
+    public void test_if_visual_user_can_login() throws InterruptedException {
+        username = "visual_user";
+        login();
+        Thread.sleep(1000);
+        assertEquals("https://www.saucedemo.com/inventory.html", driver.getCurrentUrl());
     }
 
     @AfterMethod
