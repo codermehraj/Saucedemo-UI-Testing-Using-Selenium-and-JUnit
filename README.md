@@ -24,6 +24,13 @@ I am using maven as build system. So the maven dependencies are:
             <artifactId>webdrivermanager</artifactId>
             <version>5.6.2</version>
         </dependency>
+        
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
     
