@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.xml.xpath.XPath;
 
@@ -19,6 +21,15 @@ public class InventoryPage {
      */
     @FindBy(id = "shopping_cart_link")
     private WebElement viewCart;
+
+    @FindBy(xpath = "//*[@id=\"header_container\"]/div[2]/div/span/select/option[2]")
+    private WebElement sorterZtoA;
+
+    @FindBy(xpath = "//*[@id=\"header_container\"]/div[2]/div/span/select/option[4]")
+    private WebElement  sorterHiToLo;
+
+    @FindBy(xpath = "//*[@id=\"header_container\"]/div[2]/div/span/select/option[3]")
+    private WebElement  sorterLoToHi;
 
     /*
      * WebElement representing the "Add to Cart" button for a specific item (e.g., Sauce Labs Backpack).
@@ -39,7 +50,8 @@ public class InventoryPage {
     /*
      * WebElement representing the link to the inventory link on the sidebar.
      */
-    @FindBy(id = "inventory_sidebar_link")
+//    @FindBy(id = "inventory_sidebar_link")
+    @FindBy(id = "react-burger-menu-btn")
     private WebElement inventory_link;
 
     /*
@@ -51,7 +63,7 @@ public class InventoryPage {
     /*
      * WebElement representing the link to log out from the application.
      */
-    @FindBy(id = "logout_sidebar_link")
+    @FindBy(xpath = "/html/body/div[1]/div/div/div[1]/div[1]/div[1]/div/div[2]/div[1]/nav/a[3]")
     private WebElement logout_link;
 
     /*
@@ -101,6 +113,41 @@ public class InventoryPage {
         return  true;
     }
 
+    public boolean checkZtoA(WebDriver driver) throws InterruptedException {
+        sorterZtoA.click();
+        Thread.sleep(500);
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[1]/div[2]/div[1]/a/div")).getText().equals("Test.allTheThings() T-Shirt (Red)")) return false;
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/a/div")).getText().equals("Sauce Labs Onesie")) return false;
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[3]/div[2]/div[1]/a/div")).getText().equals("Sauce Labs Fleece Jacket")) return false;
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[4]/div[2]/div[1]/a/div")).getText().equals("Sauce Labs Bolt T-Shirt")) return false;
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[5]/div[2]/div[1]/a/div")).getText().equals("Sauce Labs Bike Light")) return false;
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[6]/div[2]/div[1]/a/div")).getText().equals("Sauce Labs Backpack")) return false;
+        return true;
+    }
+
+    public boolean checkPriceLotoHi(WebDriver driver) throws InterruptedException {
+        sorterLoToHi.click();
+        Thread.sleep(500);
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[1]/div[2]/div[1]/a/div")).getText().equals("Sauce Labs Onesie")) return false;
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/a/div")).getText().equals("Sauce Labs Bike Light")) return false;
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[3]/div[2]/div[1]/a/div")).getText().equals("Sauce Labs Bolt T-Shirt")) return false;
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[4]/div[2]/div[1]/a/div")).getText().equals("Test.allTheThings() T-Shirt (Red)")) return false;
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[5]/div[2]/div[1]/a/div")).getText().equals("Sauce Labs Backpack")) return false;
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[6]/div[2]/div[1]/a/div")).getText().equals("Sauce Labs Fleece Jacket")) return false;
+        return true;
+    }
+
+    public boolean checkPriceHitoLo(WebDriver driver) throws InterruptedException {
+        sorterHiToLo.click();
+        Thread.sleep(500);
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[6]/div[2]/div[1]/a/div")).getText().equals("Sauce Labs Onesie")) return false;
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[5]/div[2]/div[1]/a/div")).getText().equals("Sauce Labs Bike Light")) return false;
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[4]/div[2]/div[1]/a/div")).getText().equals("Test.allTheThings() T-Shirt (Red)")) return false;
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[3]/div[2]/div[1]/a/div")).getText().equals("Sauce Labs Bolt T-Shirt")) return false;
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/a/div")).getText().equals("Sauce Labs Backpack")) return false;
+        if(!driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div/div/div[1]/div[2]/div[1]/a/div")).getText().equals("Sauce Labs Fleece Jacket")) return false;
+        return true;
+    }
 
     /**
      * Clicks the link to navigate to the inventory link on the sidebar.
@@ -119,7 +166,8 @@ public class InventoryPage {
     /**
      * Clicks the link to log out from the application.
      */
-    public void clickLogoutLink() {
+    public void clickLogoutLink() throws InterruptedException {
+        Thread.sleep(500);
         logout_link.click();
     }
 
